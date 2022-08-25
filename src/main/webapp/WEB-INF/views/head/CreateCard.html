@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Card</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/cards}" th:object="${card}">
+    <label for="term">Enter avialiable Balance </label>
+    <input type="text" th:field="*{avialiableBalance}" id = "term"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

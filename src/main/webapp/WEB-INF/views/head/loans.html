@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your data was succesfully transfered</title>
+</head>
+<body>
+<a href="/newLoan">Create Loan</a>
+<div th:each="loan : ${loans}" th:text="${loan}">
+</div>
+</body>
+</html>

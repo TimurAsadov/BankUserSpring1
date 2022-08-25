@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
+    <label for="term">Enter term your email</label>
+    <input type="text" th:field="*{email}" id = "term"/>
+    <br/>
+    <label for="term">Enter interest password</label>
+    <input type="text" th:field="*{password}" id = "term"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+
+</body>
+</html>

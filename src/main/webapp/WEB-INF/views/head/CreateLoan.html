@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Loan</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/loans}" th:object="${loan}">
+    <label for="term">Enter term of loan</label>
+    <input type="text" th:field="*{month}" id = "term"/>
+    <br/>
+    <label for="term">Enter interest of loan</label>
+    <input type="text" th:field="*{interest}" id = "interest"/>
+    <br/>
+    <label for="term">Enter monthly Payments of loan</label>
+    <input type="text" th:field="*{monthlyPayments}" id = "monthlyPayment"/>
+    <br/>
+    <label for="term">Enter amount of loan</label>
+    <input type="text" th:field="*{amount}" id = "amount"/>
+    <br/>
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
