@@ -1,14 +1,12 @@
 package org.bankuser.spring.entity;
 
-import org.apache.commons.lang3.time.DateUtils;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Objects;
-@Component
+
 @Entity
 @Table(name = "loan")
 public class Loan {
@@ -31,7 +29,7 @@ public class Loan {
     @NotEmpty(message = "Loan data should not be empty")
     private int month;
 
-    @Column(name = "monthlyPayments")
+    @Column(name = "monthlypayments")
     @NotEmpty(message = "Loan data should not be empty")
     private int monthlyPayments;
     @Column(name = "amount")

@@ -1,24 +1,16 @@
 package org.bankuser.spring.entity;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
-
-@Component
 @Entity
 @Table(name = "UserData")
 public class User {
 
-    private List<DebitCard> cards = new ArrayList<>();
-    private List<Loan> loans = new ArrayList<>();
+    /*private List<DebitCard> cards = new ArrayList<>();*/
+/*    private List<Loan> loans = new ArrayList<>();*/
+
 
 
     @Id
@@ -87,5 +79,30 @@ public class User {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(registrationDate, user.registrationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, password, registrationDate);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", registrationDate=" + registrationDate +
+                '}';
     }
 }

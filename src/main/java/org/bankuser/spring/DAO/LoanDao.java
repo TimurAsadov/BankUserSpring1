@@ -29,19 +29,16 @@ public class LoanDao {
     public List<Loan> showAll() {
         return jdbcTemplate.query("SELECT * FROM loan", new BeanPropertyRowMapper<>(Loan.class));
     }*/
-    private static SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
 
     public LoanDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    public static void delete(int amount) {
-    }
-
     @Transactional
     public void save(Loan loan) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         session.save(loan);
         session.close();
     }
@@ -62,7 +59,7 @@ public class LoanDao {
         currentLoan.setAmount(updatedLoan.getAmount());
         session.close();
     }
-    public static void delete(Loan loan){
+    public void delete(Loan loan){
         Session session = sessionFactory.openSession();
         session.delete(loan);
         session.close();

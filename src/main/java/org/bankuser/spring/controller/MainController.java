@@ -4,6 +4,7 @@ import org.bankuser.spring.DAO.DebitCardDao;
 import org.bankuser.spring.DAO.LoanDao;
 import org.bankuser.spring.entity.DebitCard;
 import org.bankuser.spring.entity.Loan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/main")
 @Controller
 public class MainController {
-    private final DebitCardDao debitCardDao;
+    /*private final DebitCardDao debitCardDao;
 
+    @Autowired
     public MainController(DebitCardDao debitCardDao, LoanDao loanDao) {
         this.debitCardDao = debitCardDao;
         this.loanDao = loanDao;
@@ -28,7 +30,7 @@ public class MainController {
     }
     @PostMapping("/cards")
     public String addCard(@ModelAttribute("card") DebitCard debitCard){
-        DebitCardDao.save(debitCard);
+        debitCardDao.save(debitCard);
         return "redirect:/cards";
     }
     @GetMapping("/newCard")
@@ -38,7 +40,7 @@ public class MainController {
     }
     @DeleteMapping("/deletCard")
     public String delete(DebitCard cardnumber) {
-        DebitCardDao.delete(cardnumber);
+        debitCardDao.delete(cardnumber);
         return "redirect:/cards";
     }
 
@@ -64,9 +66,9 @@ public class MainController {
         model.addAttribute("loan",new Loan());
         return "/CreateLoan";
     }
-    @DeleteMapping("/deleteLoan")
-    public String delete(int amount) {
-        LoanDao.delete(amount);
+    *//*@DeleteMapping("/deleteLoan")
+    public String delete(Loan loan) {
+        loanDao.delete(loan);
         return "redirect:/loans";
-    }
+    }*/
 }

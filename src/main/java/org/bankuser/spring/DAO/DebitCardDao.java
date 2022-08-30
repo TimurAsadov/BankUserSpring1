@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-@Repository
+
 @Component
 public class DebitCardDao {
     /*private static JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -28,14 +28,14 @@ public class DebitCardDao {
     public void update(String cardnumber, DebitCard updatedDebitCard) {
         jdbcTemplate.update("UPDATE card SET cardnumber=?, avialiablebalance=?, expiredate=?, cvv=? WHERE cardnumber=?", updatedDebitCard.getCardNumber(), updatedDebitCard.getAvialiableBalance(), updatedDebitCard.getExpireDate(), updatedDebitCard.getCvv(), cardnumber);
     }*/
-    private static SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public DebitCardDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
     @Transactional
-    public static void save(DebitCard debitCard) {
-        Session session = sessionFactory.getCurrentSession();
+    public void save(DebitCard debitCard) {
+        Session session = sessionFactory.openSession();
         session.save(debitCard);
         session.close();
     }
@@ -55,7 +55,7 @@ public class DebitCardDao {
         session.close();
     }
     @Transactional
-    public static void delete(DebitCard deletedCard){
+    public void delete(DebitCard deletedCard){
         Session session = sessionFactory.openSession();
         session.delete(deletedCard);
         session.close();

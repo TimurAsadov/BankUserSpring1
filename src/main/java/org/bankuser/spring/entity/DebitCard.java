@@ -5,7 +5,6 @@ import java.util.Objects;
 import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "card")
@@ -17,37 +16,36 @@ public class DebitCard {
     private int id;
 
 
+   /* @Column(name = "balance")*/
+    private double balance;
 
+/*    @Column(name = "number")*/
+    private String number;
 
-    private double avialiableBalance;
-
-    @Column(name = "CardNumber")
-    private String CardNumber;
-
-    @Column(name = "expireDate")
-    private Date expireDate;
+/*    @Column(name = "expire")*/
+    private Date expire;
 
 
     private int cvv;
 
     public double getAvialiableBalance() {
-        return avialiableBalance;
+        return balance;
     }
 
     public void setAvialiableBalance(double avialiableBalance) {
-        this.avialiableBalance = avialiableBalance;
+        this.balance = avialiableBalance;
     }
 
     public String getCardNumber() {
-        return CardNumber;
+        return number;
     }
 
     public void setCardNumber(String cardNumber) {
-        CardNumber = cardNumber;
+        cardNumber = cardNumber;
     }
 
     public Date getExpireDate() {
-        return expireDate;
+        return expire;
     }
 
 
@@ -72,12 +70,12 @@ public class DebitCard {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DebitCard debitCard = (DebitCard) o;
-        return Double.compare(debitCard.avialiableBalance, avialiableBalance) == 0 && cvv == debitCard.cvv && Objects.equals(CardNumber, debitCard.CardNumber) && Objects.equals(expireDate, debitCard.expireDate);
+        return Double.compare(debitCard.balance, balance) == 0 && cvv == debitCard.cvv && Objects.equals(number, debitCard.number) && Objects.equals(expire, debitCard.expire);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(avialiableBalance, CardNumber, expireDate, cvv);
+        return Objects.hash(balance, number, expire, cvv);
     }
     public String generateCardNumber(){
         long a = 1000000000000000L;
@@ -98,9 +96,9 @@ public class DebitCard {
     @Override
     public String toString() {
         return "DebitCard{" +
-                "avialiableBalance=" + avialiableBalance +
-                ", CardNumber='" + CardNumber + '\'' +
-                ", expireDate=" + expireDate +
+                "avialiableBalance=" + balance +
+                ", CardNumber='" + number + '\'' +
+                ", expireDate=" + expire +
                 ", cvv=" + cvv +
                 '}';
     }
@@ -113,6 +111,6 @@ public class DebitCard {
     }
 
     public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
+        this.expire = expireDate;
     }
 }

@@ -1,6 +1,7 @@
 package org.bankuser.spring.DAO;
 
 import org.bankuser.spring.controller.AuthRegisterController;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -8,6 +9,7 @@ import org.hibernate.Transaction;
 import org.bankuser.spring.entity.DebitCard;
 import org.bankuser.spring.entity.Loan;
 import org.bankuser.spring.entity.User;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -20,15 +22,13 @@ import org.springframework.stereotype.Controller;
 
 import javax.transaction.Transactional;
 import java.util.List;
-@Configuration
 @Component
-@Controller
 public class UserDao {
 
 
 
 
-    private static SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public UserDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -36,7 +36,7 @@ public class UserDao {
 
     @Transactional
     public void save(User user) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         session.save(user);
         session.close();
     }
@@ -77,17 +77,27 @@ public class UserDao {
         currentUser.setPassword(updatedUser.getPassword());
         session.close();
     }
-    public static void delete(User user){
+    public void delete(User user){
         Session session = sessionFactory.openSession();
         session.delete(user);
         session.close();
     }
-    public void checkEmail(AuthRegisterController authRegisterController){
+  /*  public User checkEmail(String email, String password){
         Session session = sessionFactory.openSession();
         Criteria cr = session.createCriteria(User.class);
-        cr.add(Restructions.eq("email", authRegisterController.doLogin()))
+        cr.add(Restrictions.eq("email", email));
+        cr.add(Restrictions.eq("password", password));
+        
+    }*/
 
+    @Transactional
+    public User checkEmail(String email, String password){
+        Session session = sessionFactory.openSession();
+        User user  = (User) session.createNativeQuery("SELECT * FROM UserData WHERE email=? AND password=?").addEntity(User.class).list();
+        session.close();
+        return user;
     }
-    public void checkPassword(){}
+
+
 
 }
