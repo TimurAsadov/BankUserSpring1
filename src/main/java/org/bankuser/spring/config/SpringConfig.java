@@ -90,18 +90,6 @@ public class SpringConfig implements WebMvcConfigurer {
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
-    /* String dialect = "hibernate.dialect";
-     String showSQL = "hibernate.show_sql";
-     String formatSQL = "hibernate.format_sql";
-     String hbm2ddl = "hibernate.hbm2ddl.auto";
-     private Properties hibernateProperties() {
-         Properties properties = new Properties();
-         properties.put("hibernate.dialect", environment.getRequiredProperty(dialect));
-         properties.put("hibernate.show_sql", environment.getRequiredProperty(showSQL));
-         properties.put("hibernate.format_sql", environment.getRequiredProperty(formatSQL));
-         properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-         return properties;
-     }*/
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");

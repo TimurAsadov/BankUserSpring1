@@ -1,36 +1,61 @@
 package org.bankuser.spring.entity;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
+
 @Entity
-@Table(name = "UserData")
+@Table(name = "userdata")
 public class User {
-
-    /*private List<DebitCard> cards = new ArrayList<>();*/
-/*    private List<Loan> loans = new ArrayList<>();*/
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstName")
+
+
+    @Column(name = "firstname")
     private String firstName;
-    @Column(name = "lastName")
+    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "email")
+    public List<DebitCard> getCards() {
+        return cards;
+    }
+
+    public void setCards(List<DebitCard> cards) {
+        this.cards = cards;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
     private String email;
 
-    @Column(name = "password")
+
     private String password;
 
-    @Column(name = "registrationDate")
+    @Column(name = "date")
     private Date registrationDate;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "cardUser")
+    private List <DebitCard> cards;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "loanUser")
+    private List <Loan> loans;
 
     public String getFirstName() {
         return firstName;
@@ -65,6 +90,7 @@ public class User {
     }
 
     public Date getRegistrationDate() {
+        Date registrationDate = new Date();
         return registrationDate;
     }
 
@@ -92,6 +118,10 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, email, password, registrationDate);
+    }
+    public Date registerDate(){
+        Date curr = new Date();
+        return curr;
     }
 
     @Override

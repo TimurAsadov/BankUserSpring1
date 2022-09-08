@@ -1,8 +1,6 @@
-package org.bankuser.spring.DAO;
+package org.bankuser.spring.dao;
 
-import org.bankuser.spring.entity.DebitCard;
 import org.bankuser.spring.entity.Loan;
-import org.bankuser.spring.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;

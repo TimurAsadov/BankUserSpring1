@@ -19,6 +19,8 @@ public class Loan {
 
     @Column(name = "application")
     private Date application;
+
+
     @NotEmpty(message = "interest rate should not be empty")
     @Size( min = 1, max=100, message = "interest rate should not be empty")
 
@@ -36,6 +38,19 @@ public class Loan {
     @NotEmpty(message = "Loan data should not be empty")
     @Size( min = 1, max=100000, message = "amount should not be empty")
     private int amount;
+
+
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    public User loanUser;
+
+    public User getLoanUser() {
+        return loanUser;
+    }
+
+    public void setLoanUser(User loanUser) {
+        this.loanUser = loanUser;
+    }
 
     public int getAmount() {
         return amount;
@@ -98,9 +113,9 @@ public class Loan {
         return Objects.hash(application, interest, month, monthlyPayments);
     }
 
-    public Date applicationDate(){;
+    public void applicationDate(){
         Date curr = new Date();
-        return curr;
+        this.application = curr;
     }
 
 

@@ -16,38 +16,51 @@ public class DebitCard {
     private int id;
 
 
-   /* @Column(name = "balance")*/
     private double balance;
 
-/*    @Column(name = "number")*/
+
     private String number;
 
-/*    @Column(name = "expire")*/
+
     private Date expire;
 
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    public User cardUser;
+
+    public User getCardUser() {
+        return cardUser;
+    }
+
+    public void setCardUser(User cardUser) {
+        this.cardUser = cardUser;
+    }
 
     private int cvv;
 
-    public double getAvialiableBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setAvialiableBalance(double avialiableBalance) {
-        this.balance = avialiableBalance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
-    public String getCardNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setCardNumber(String cardNumber) {
-        cardNumber = cardNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Date getExpireDate() {
+    public Date getExpire() {
         return expire;
     }
 
+    public void setExpire(Date expire) {
+        this.expire = expire;
+    }
 
     public int getCvv() {
         return cvv;
@@ -77,20 +90,20 @@ public class DebitCard {
     public int hashCode() {
         return Objects.hash(balance, number, expire, cvv);
     }
-    public String generateCardNumber(){
+    public void generateCardNumber(){
         long a = 1000000000000000L;
         long b = 8999999999999999L;
 
         long cardNumber0 = a + (long) (Math.random() * b);
         String cardNumber = Long.toString(cardNumber0);
-        return cardNumber;
+        this.number = cardNumber;
     }
-    public int generateCVV(){
+    public void generateCVV(){
         int a = 100; // Начальное значение диапазона - "от"
         int b = 899; // Конечное значение диапазона - "до"
 
         int cvv = a + (int) (Math.random() * b);
-        return cvv;
+        this.cvv = cvv;
     }
 
     @Override
@@ -102,15 +115,16 @@ public class DebitCard {
                 ", cvv=" + cvv +
                 '}';
     }
-    public Date generateExpireDate(){;
+    public void generateExpireDate(){;
         Date currDate = new Date();
         int yearsToAdd = 3;
         Date expireDate = DateUtils.addYears(currDate, yearsToAdd);
-
-        return expireDate;
+        this.expire = expireDate;
     }
 
     public void setExpireDate(Date expireDate) {
         this.expire = expireDate;
     }
+
+
 }

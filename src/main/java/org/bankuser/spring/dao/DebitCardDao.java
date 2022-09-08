@@ -1,10 +1,9 @@
-package org.bankuser.spring.DAO;
+package org.bankuser.spring.dao;
 
 import org.bankuser.spring.entity.DebitCard;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -50,8 +49,8 @@ public class DebitCardDao {
     public void update(int id, DebitCard updatedCard) {
         Session session = sessionFactory.openSession();
         DebitCard currentCard = session.get(DebitCard.class,id);
-        currentCard.setAvialiableBalance(updatedCard.getAvialiableBalance());
-        currentCard.setExpireDate(updatedCard.getExpireDate());
+        currentCard.setBalance(updatedCard.getBalance());
+        currentCard.setExpireDate(updatedCard.getExpire());
         session.close();
     }
     @Transactional
