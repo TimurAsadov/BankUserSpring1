@@ -35,11 +35,9 @@ public class AuthRegisterController {
         return ("/login");
     }
 
-
     @PostMapping("/login")
     public String doLogin(@ModelAttribute("user") User user, Model model){
         loggedInUser = userDao.login(user.getEmail(),user.getPassword());
-
         return ("redirect:/");
     }
 
@@ -55,19 +53,6 @@ public class AuthRegisterController {
         return ("redirect:/login");
     }
 
-    /*@GetMapping("/users")
-    public String users(Model model){
-        model.addAttribute("users",userDao.showAll());
-        //debitCardDao.showAll();
-        return ("/users");
-    }*/
-     /*@PostMapping("/users")
-    public String addUser(@ModelAttribute("user") User user){
-        userDao.save(user);
-        user.getRegistrationDate();
-        user.registerDate();
-        return "redirect:/users";
-    }*/
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("users",userDao.showAll());
