@@ -1,10 +1,10 @@
 package org.bankuser.spring.entity;
 
-import java.util.Date;
-import java.util.Objects;
 import org.apache.commons.lang3.time.DateUtils;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "card")

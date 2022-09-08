@@ -6,7 +6,6 @@ import org.bankuser.spring.dao.UserDao;
 import org.bankuser.spring.entity.DebitCard;
 import org.bankuser.spring.entity.Loan;
 import org.bankuser.spring.entity.User;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
