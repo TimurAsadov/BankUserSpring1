@@ -1,5 +1,4 @@
 package org.bankuser.spring.controller;
-
 import org.bankuser.spring.dao.DebitCardDao;
 import org.bankuser.spring.dao.LoanDao;
 import org.bankuser.spring.dao.UserDao;
@@ -14,20 +13,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-
 public class AuthRegisterController {
-    private User loggedInUser = null;
-    private final LoanDao loanDao;
-    private final UserDao userDao;
-    private final DebitCardDao debitCardDao;
-
-
     public AuthRegisterController(LoanDao loanDao, UserDao userDao, DebitCardDao debitCardDao) {
         this.loanDao = loanDao;
         this.userDao = userDao;
         this.debitCardDao = debitCardDao;
     }
-
+    private User loggedInUser = null;
+    private final LoanDao loanDao;
+    private final UserDao userDao;
+    private final DebitCardDao debitCardDao;
     @GetMapping("/login")
     public String getLoginPage(Model model, User user){
         model.addAttribute("user",user);
@@ -39,7 +34,6 @@ public class AuthRegisterController {
         loggedInUser = userDao.login(user.getEmail(),user.getPassword());
         return ("redirect:/");
     }
-
     @GetMapping("/register")
     public String getRegisterPage(Model model, User user){
         model.addAttribute("user",user);
@@ -51,7 +45,6 @@ public class AuthRegisterController {
         userDao.save(user);
         return ("redirect:/login");
     }
-
     @GetMapping("/users")
     public String users(Model model){
         model.addAttribute("users",userDao.showAll());
@@ -66,12 +59,9 @@ public class AuthRegisterController {
         user.registerDate();
         return "redirect:/users";
     }
-
-
     @GetMapping("/cards")
     public String cards(Model model){
         model.addAttribute("cards",loggedInUser.getCards());
-        //debitCardDao.showAll();
         return ("/cards");
     }
     @PostMapping("/cards")
@@ -82,13 +72,12 @@ public class AuthRegisterController {
         debitCard.setCardUser(loggedInUser);
         debitCardDao.save(debitCard);
         loggedInUser.getCards().add(debitCard);
-
         return "redirect:/cards";
     }
     @GetMapping("/newCard")
     public String newCard(Model model){
         model.addAttribute("card",new DebitCard());
-        return "/CreateCard";
+        return "createcard";
     }
     @DeleteMapping("/deletCard")
     public String delete(DebitCard cardnumber) {
@@ -118,6 +107,6 @@ public class AuthRegisterController {
     @GetMapping("/newLoan")
     public String newLoan(Model model){
         model.addAttribute("loan",new Loan());
-        return "/CreateLoan";
+        return "/createloan";
     }
 }

@@ -10,13 +10,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 @Component
 public class UserDao {
-
     private SessionFactory sessionFactory;
-
     public UserDao(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
     @Transactional
     public void save(User user) {
         Session session = sessionFactory.openSession();
